@@ -1,0 +1,22 @@
+{
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/bower_components": true,
+        "**/*.code-search": true,
+        "out/*/**": true,
+        "output/*/**": true,
+        "data/*/**": true,
+        "pretrained/*/**": true
+    },
+    "files.watcherExclude": {
+        "**/.git/objects/**": true,
+        "**/.git/subtree-cache/**": true,
+        "**/node_modules/*/**": true,
+        "**/.hg/store/**": true,
+        "out/*/**": true,
+        "output/*/**": true,
+        "data/*/**": true,
+        "pretrained/*/**": true
+    },
+    // "python.analysis.autoImportCompletions": true
+}

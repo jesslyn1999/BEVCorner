@@ -1,0 +1,11 @@
+{
+    "exclude": [
+        "**/node_modules",
+        "**/bower_components",
+        "**/*.code-search",
+        "out/*/**",
+        "output/*/**",
+        "data/*/**",
+        "pretrained/*/**"
+    ]
+}

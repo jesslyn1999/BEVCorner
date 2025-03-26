@@ -1,0 +1,310 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "cwd": "bevdepth/layers/backbones/DCNv2",
+            "name": "Python setup develop monoflex",
+            "type": "python",
+            "request": "launch",
+            "program": "setup.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+                "build", "develop"
+            ]
+        },
+        {
+            "name": "Python setup develop",
+            "type": "python",
+            "request": "launch",
+            "program": "setup.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+                "develop"
+            ]
+        },
+        {
+            "name": "Python gen info",
+            "type": "python",
+            "request": "launch",
+            "program": "scripts/gen_info.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args": [
+                "develop"
+            ]
+        },
+        {
+            "name": "Tmp Resnet",
+            "type": "python",
+            "request": "launch",
+            "program": "resnet-temp.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args": [],
+            "env": {"CUDA_LAUNCH_BLOCKING": "1"}
+        },
+        {
+            "name": "Evaluation",
+            "type": "python",
+            "request": "launch",
+            "program": "bevdepth/exps/nuscenes/mv/bev_depth_lss_r50_256x704_128x128_24e_2key.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+                // "--ckpt_path", "pretrained/bev_depth_lss_r50_256x704_128x128_20e_cbgs_2key_da_ema.pth",
+                // "--ckpt_path", "outputs/bev_depth_lss_r50_256x704_128x128_24e_2key/lightning_logs/version_0/0.pth",
+                "--ckpt_path", "new_outputs/bev_depth_lss_r50_256x704_128x128_24e_2key/lightning_logs/version_4/1.pth",
+                "-e",
+                "-b", "8",
+                "--gpus", "2"
+            ],
+            "env": {
+                "CUDA_LAUNCH_BLOCKING": "1",
+                "MASTER_PORT": "44602"
+            }
+        },
+        {
+            "name": "Evaluation 2",
+            "type": "python",
+            "request": "launch",
+            "program": "bevdepth/exps/nuscenes/mv/bev_depth_lss_r50_256x704_128x128_24e_2key.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+                // "--ckpt_path", "pretrained/bev_depth_lss_r50_256x704_128x128_24e_2key.pth",
+                // "--ckpt_path", "outputs/bev_depth_lss_r50_256x704_128x128_24e_2key/lightning_logs/version_0/0.pth",
+                // "--ckpt_path ", "outputs/bev_depth_lss_r50_256x704_128x128_24e_2key/lightning_logs/version_0/0.pth",
+                "--ckpt_path", "outputs/bev_depth_lss_r50_256x704_128x128_24e_2key_direct_replacement_fixed/lightning_logs/version_3/checkpoints/epoch=0-step=2344.ckpt",
+                // "--ckpt_path", "outputs/bev_depth_lss_r50_256x704_128x128_24e_2key_weighted_fusion_fixed/lightning_logs/version_2/checkpoints/epoch=18-step=66804.ckpt",
+                "-e",
+                "-b", "8",
+                "--gpus", "2"
+            ],
+            "env": {
+                "CUDA_LAUNCH_BLOCKING": "1",
+                "MASTER_PORT": "44602"
+            }
+        },
+        {
+            "name": "Training mini - monoflex",
+            "type": "python",
+            "request": "launch",
+            "program": "bevdepth/exps/nuscenes/mv/monoflex_bev_depth_lss_r50_256x704_128x128_24e_2key.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+                "--amp_backend=native",
+                "-b", "4",
+                "--gpus", "1",
+                "--run_mode", "monoflex",  // bevdepth, bevcorner, monoflex
+                // "--ckpt_path", "pretrained/monoflex/model_moderate_best_soft.pth",
+                // "--ckpt_path", "outputs/monoflex/bev_dFepth_lss_r50_256x704_128x128_24e_2key_weighted_fusion_learned_mini/lightning_logs/version_0/checkpoints/epoch=37-step=570.ckpt"
+                "--ckpt_path", "outputs/monoflex/bev_depth_lss_r50_256x704_128x128_24e_2key_weighted_fusion_learned_mini/lightning_logs/version_6/checkpoints/epoch=2-step=5274.ckpt"
+            ],
+            "env": {
+                "CUDA_LAUNCH_BLOCKING": "1",
+                "MASTER_PORT": "24513"
+            }
+        },
+        {
+            "name": "Eval mini - monoflex",
+            "type": "python",
+            "request": "launch",
+            "program": "bevdepth/exps/nuscenes/mv/monoflex_bev_depth_lss_r50_256x704_128x128_24e_2key.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+                "--amp_backend=native",
+                "-b", "1",
+                "--gpus", "1",
+                "--run_mode", "monoflex",  // bevdepth, bevcorner, monoflex
+                // "--ckpt_path", "pretrained/monoflex/model_moderate_best_soft.pth",
+                "-e",
+                "--ckpt_path", "pretrained/monoflex/best_version_so_far_3e_big.ckpt"
+            ],
+            "env": {
+                "CUDA_LAUNCH_BLOCKING": "1",
+                "MASTER_PORT": "44513"
+            }
+        },
+        {
+            "name": "Training mini - bevdepth",
+            "type": "python",
+            "request": "launch",
+            "program": "bevdepth/exps/nuscenes/mv/bevdepth_bev_depth_lss_r50_256x704_128x128_24e_2key.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+                "--amp_backend=native",
+                "-b", "4",
+                "--gpus", "4",
+                "--run_mode", "bevdepth", // bevdepth, bevcorner, monoflex
+                // "--ckpt_path", "pretrained/bevdepth/bev_depth_lss_r50_256x704_128x128_24e_2key.pth",
+                "--ckpt_path", "outputs/bevdepth/bev_depth_lss_r50_256x704_128x128_24e_2key_weighted_fusion_learned_mini/lightning_logs/version_17/checkpoints/epoch=23-step=360.ckpt",
+            ],
+            "env": {
+                "CUDA_LAUNCH_BLOCKING": "1",
+                "MASTER_PORT": "46516"
+            }
+        },
+        {
+            "name": "Eval mini - bevdepth",
+            "type": "python",
+            "request": "launch",
+            "program": "bevdepth/exps/nuscenes/mv/bevdepth_bev_depth_lss_r50_256x704_128x128_24e_2key.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+                "--amp_backend=native",
+                "-b", "6",
+                "--gpus", "4",
+                "--run_mode", "bevdepth", // bevdepth, bevcorner, monoflex
+                "--ckpt_path", "pretrained/bevdepth/bev_depth_lss_r50_256x704_128x128_24e_2key.pth",
+                // "--ckpt_path", "outputs/bevdepth/bev_depth_lss_r50_256x704_128x128_24e_2key_weighted_fusion_learned_mini/lightning_logs/version_18/checkpoints/epoch=23-step=360.ckpt",
+                "-e",
+            ],
+            "env": {
+                "CUDA_LAUNCH_BLOCKING": "1",
+                "MASTER_PORT": "46516"
+            }
+        },
+        {
+            "name": "Training mini - bevcorner",
+            "type": "python",
+            "request": "launch",
+            "program": "bevdepth/exps/nuscenes/mv/bevcorner_bev_depth_lss_r50_256x704_128x128_24e_2key.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+                "--amp_backend=native",
+                "-b", "2",
+                "--gpus", "4",
+                "--run_mode", "bevcorner", // bevdepth, bevcorner, monoflex
+                // "--ckpt_paths", "outputs/bevcorner/bev_depth_lss_r50_256x704_128x128_24e_2key_fixed-roi_refinement-fixed/lightning_logs/version_1/checkpoints/epoch=0-step=3516.ckpt", 
+                // "pretrained/monoflex/best_version_so_far_2e_big.ckpt", 
+                // "--ckpt_paths", "pretrained/bevdepth/bev_depth_lss_r50_256x704_128x128_24e_2key.pth",
+                "--ckpt_paths", "outputs/bevcorner/bev_depth_lss_r50_256x704_128x128_24e_2key_fixed-roi_refinement-learned/lightning_logs/version_0/checkpoints/epoch=0-step=3516.ckpt",
+                "pretrained/monoflex/best_version_so_far_3e_big_v0.ckpt",
+                "--monoflex_depth_mode", "fixed",
+                "--depth_fused_mode", "roi_refinement",
+                "--depth_blend_weight_mode", "learned"
+            ],
+            "env": {
+                "CUDA_LAUNCH_BLOCKING": "1",
+                "MASTER_PORT": "46516"
+            }
+        },
+        {
+            "name": "Eval mini - bevcorner",
+            "type": "python",
+            "request": "launch",
+            "program": "bevdepth/exps/nuscenes/mv/bevcorner_bev_depth_lss_r50_256x704_128x128_24e_2key.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+                "--amp_backend=native",
+                "-b", "2",
+                "--gpus", "4",
+                "--run_mode", "bevcorner", // bevdepth, bevcorner, monoflex
+                // "--ckpt_path", "outputs/bevcorner/good_bev_depth_lss_r50_256x704_128x128_24e_2key_weighted_fusion_learned_mini/lightning_logs/version_19/checkpoints/epoch=23-step=480.ckpt",
+                // "--ckpt_path", "outputs/bevcorner/bev_depth_lss_r50_256x704_128x128_24e_2key_fixed-weighted_fusion-fixed/lightning_logs/version_2/checkpoints/epoch=0-step=3516.ckpt",
+                // "--ckpt_path", "outputs/bevcorner/bev_depth_lss_r50_256x704_128x128_24e_2key_fixed-weighted_fusion-geometry/lightning_logs/version_3/checkpoints/epoch=0-step=3516.ckpt",
+                // "--ckpt_path", "outputs/bevcorner/bev_depth_lss_r50_256x704_128x128_24e_2key_fixed-weighted_fusion-learned/lightning_logs/version_1/checkpoints/epoch=0-step=3516.ckpt",
+                // "--ckpt_path", "outputs/bevcorner/bev_depth_lss_r50_256x704_128x128_24e_2key_fixed-roi_refinement-fixed/lightning_logs/version_1/checkpoints/epoch=0-step=3516.ckpt",
+                // "--ckpt_path", "outputs/bevcorner/bev_depth_lss_r50_256x704_128x128_24e_2key_fixed-roi_refinement-geometry/lightning_logs/version_5/checkpoints/epoch=0-step=3516.ckpt",
+                // "--ckpt_path", "outputs/bevcorner/bev_depth_lss_r50_256x704_128x128_24e_2key_fixed-roi_refinement-learned/lightning_logs/version_0/checkpoints/epoch=0-step=3516.ckpt",
+                "--ckpt_path", "outputs/bevcorner/bev_depth_lss_r50_256x704_128x128_24e_2key_fixed-direct_replacement-fixed/lightning_logs/version_2/checkpoints/epoch=0-step=3516.ckpt",
+                // "--ckpt_path", "outputs/bevcorner/bev_depth_lss_r50_256x704_128x128_24e_2key_fixed-hard_combine-fixed/lightning_logs/version_0/checkpoints/epoch=0-step=3516.ckpt",  // TODO
+                // "--ckpt_path", "pretrained/bevcorner/epoch=12-step=390.ckpt",
+                // "--ckpt_path", "outputs/bevcorner/pred_pure_bev_depth_lss_r50_256x704_128x128_24e_2key_fixed-roi_refinement-learned/lightning_logs/version_5/checkpoints/epoch=0-step=30.ckpt",
+                "-e",
+                "--monoflex_depth_mode", "fixed",
+                "--depth_fused_mode", "direct_replacement",
+                "--depth_blend_weight_mode", "fixed"
+            ],
+            "env": {
+                "CUDA_LAUNCH_BLOCKING": "1",
+                "MASTER_PORT": "46516"
+            }
+        },
+        {
+            "name": "Training",
+            "type": "python",
+            "request": "launch",
+            "program": "bevdepth/exps/nuscenes/mv/bev_depth_lss_r50_256x704_128x128_24e_2key.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+                // "--ckpt_path", "pretrained/bev_depth_lss_r50_256x704_128x128_24e_2key.pth",
+                "--ckpt_path", "outputs/bev_depth_lss_r50_256x704_128x128_24e_2key/1-manual.pth",
+                // "-e",
+                "--amp_backend=native",
+                "-b", "4",
+                "--gpus", "3"
+            ],
+            "env": {
+                "CUDA_LAUNCH_BLOCKING": "1",
+                "MASTER_PORT": "44513"
+            }
+        },
+        {
+            "name": "Training 2 gpus",
+            "type": "python",
+            "request": "launch",
+            "program": "bevdepth/exps/nuscenes/mv/bev_depth_lss_r50_256x704_128x128_24e_2key.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+                // "--ckpt_path", "pretrained/bev_depth_lss_r50_256x704_128x128_24e_2key.pth",
+                "--ckpt_path", "outputs/bev_depth_lss_r50_256x704_128x128_24e_2key/1-manual.pth",
+                // "-e",
+                "--amp_backend=native",
+                "-b", "4",
+                "--gpus", "2"
+            ],
+            "env": {
+                "CUDA_LAUNCH_BLOCKING": "1",
+                "MASTER_PORT": "44513"
+            }
+        },
+        {
+            "name": "Training2",
+            "type": "python",
+            "request": "launch",
+            "program": "bevdepth/exps/nuscenes/mv/bev_depth_lss_r50_256x704_128x128_24e_2key.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+                // "--ckpt_path", "pretrained/bev_depth_lss_r50_256x704_128x128_20e_cbgs_2key_da_ema.pth",
+                // "-e",
+                "--amp_backend=native",
+                "-b", "4",
+                "--gpus", "3"
+            ],
+            "env": {
+                "CUDA_LAUNCH_BLOCKING": "1",
+                "MASTER_PORT": "44533"
+            }
+        },
+        {
+            "name": "Visualization",
+            "type": "python",
+            "request": "launch",
+            "program": "scripts/visualize_nusc.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+                "5",  // "idx",
+                "outputs/bevcorner/pred_pure_bev_depth_lss_r50_256x704_128x128_24e_2key_fixed-weighted_fusion-geometry/results_nusc.json",  // "result_path",
+                "outputs/bevcorner/pred_pure_bev_depth_lss_r50_256x704_128x128_24e_2key_fixed-weighted_fusion-geometry/examples2_5.png",  // "target_path", 
+            ],
+            "env": {"CUDA_LAUNCH_BLOCKING": "1"}
+        }
+    ]
+}
+ 
