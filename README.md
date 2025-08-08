@@ -1,5 +1,5 @@
 ## BEVCorner
-BEVCorner, a novel framework that synergistically integrates monocular and multiview pipelines for enhanced 3D object detection in autonomous driving. By fusing depth maps from Bird’s-Eye View (BEV) with object-centric depth estimates from monocular detection, BEVCorner enhances both global context and local precision, addressing the limitations of existing methods in depth precision, occlusion robustness, and computational efficiency. For more details, please refer to our paper (TBD).
+BEVCorner, a novel framework that synergistically integrates monocular and multiview pipelines for enhanced 3D object detection in autonomous driving. By fusing depth maps from Bird’s-Eye View (BEV) with object-centric depth estimates from monocular detection, BEVCorner enhances both global context and local precision, addressing the limitations of existing methods in depth precision, occlusion robustness, and computational efficiency. For more details, please refer to our [paper](https://www.mdpi.com/2076-3417/15/7/3896).
 
 <img src="assets/BEVCorner-Arch.png" width="1000" >
 
